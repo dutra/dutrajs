@@ -1,8 +1,48 @@
+/* Typography
+   -------------------------------------------------- */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.42;
+}
+/* Body
+   -------------------------------------------------- */
+body {
+    background-color: #fff;
+    padding-top: 20px;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+/* Awesome icons
+   -------------------------------------------------- */
+a > i {
+    padding-left: 10px;
+    color: black;
+}
+
+
+/* Sticky footer
+   -------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 100px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 100px;
+    background-color: #f5f5f5;
+    padding-top: 15px;
+}
+.footer p {
+    line-height: 1.0;
 }

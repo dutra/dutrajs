@@ -1,13 +1,23 @@
 doctype html
 html
   head
-    title= title
-    each vendor_stylesheet in  ['bootstrap', 'bootstrap-theme']
-      link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/'+ vendor_stylesheet + '.css')
+    title= 'dutra.io | '+ title
+    
+    meta(name="viewport", content="width=device-width, initial-scale=1")
 
+    each vendor_stylesheet in  ['bootstrap', 'bootstrap-theme', 'font-awesome.min']
+      link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/'+ vendor_stylesheet + '.css')
+      
+    link(rel='stylesheet', type='text/css', media='all' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Lato:100')
+    link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/style.css')
+      
     body
+        
+      include header
       block content
 
-    each vendor_script in ['bootstrap']
+      include footer
+        
+    each vendor_script in ['jquery-2.1.1', 'bootstrap']
       script(type='text/javascript', src='/javascripts/vendor/'+vendor_script+'.js')
     
