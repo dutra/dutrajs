@@ -11,7 +11,9 @@ html
     link(rel='stylesheet', type='text/css', media='all' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Lato:100,300,400|Roboto:100,300,400')
     link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/fonts.css')
     link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/style.css')
-      
+
+    block stylesheets
+          
     body
         
       include header
@@ -22,4 +24,4 @@ html
     each vendor_script in ['jquery-2.1.1', 'bootstrap', 'imagesloaded.pkgd.min', 'jquery.nanogallery.min']
       script(type='text/javascript', src='/javascripts/vendor/'+vendor_script+'.js')
 
-    script(type='text/javascript', src='/javascripts/'+view+'.js')
+    block scripts

@@ -1,0 +1,16 @@
+extends layout
+
+block stylesheets
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/leaflet.css')
+
+block scripts
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.js')
+  script(type='text/javascript', src='/javascripts/travel.js')
+    
+  
+block content
+
+  .container
+    .row
+      .col-sm-12
+        #map
