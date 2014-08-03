@@ -1,0 +1,11 @@
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #map {
+	height: 500px;
+    }
+    .container {
+	padding-left: 90px;
+	padding-right: 90px;
+    }
+
+}

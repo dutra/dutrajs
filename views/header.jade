@@ -1,3 +1,4 @@
+
 mixin navli(item, path)
   li
     a(href=path)
@@ -10,14 +11,26 @@ mixin navli(item, path)
 .nav.navbar-default(role="navigation")
   .container
 
-    .navbar-header
-      a.navbar-brand(href="/") dutra.io
+    
+      
+    a.navbar-brand(href="/") dutra
+      span.red-dot .
+      | io
 
+    .navbar-header
+      button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        spain.icon-bar
+
+    
     .collapse.navbar-collapse.navbar-right
       ul.nav.navbar-nav
         +navli('index', '/') home
         +navli('about', '/about') about
         +navli('projects', '#') projects
         +navli('photos', '/photos') photos
+        +navli('travel', '/travel') travel
         +navli('contact', '#') contact
       

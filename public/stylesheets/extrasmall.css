@@ -1,0 +1,21 @@
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 768px) {
+
+    body {
+        /* Margin bottom by footer height */
+        margin-bottom: 120px;
+    }
+    .footer {
+        height: 120px;
+    }
+
+        .navbar-default .navbar-brand {
+	padding-left: 15px;
+    }
+
+
+
+    #map {
+        height: 500px;
+    }
+}

@@ -3,14 +3,16 @@ html
   head
     title= 'dutra.io | '+ title
     
-    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
 
     each vendor_stylesheet in  ['bootstrap', 'bootstrap-theme', 'font-awesome.min', 'nanogallery_clean']
       link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/'+ vendor_stylesheet + '.css')
       
     link(rel='stylesheet', type='text/css', media='all' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Lato:100,300,400|Roboto:100,300,400')
     link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/fonts.css')
-    link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/style.css')
+
+    each size in ['all', 'extrasmall', 'small', 'medium', 'large']
+      link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/'+size+'.css')
 
     block stylesheets
           

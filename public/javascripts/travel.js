@@ -4,7 +4,7 @@ var tile = 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg';
 
 $(document).ready(function() {
     var map = L.map('map', {
-	center: [25,0],
+	center: [25,-70],
 	zoom: 2,
 	minZoom: 1
     });
