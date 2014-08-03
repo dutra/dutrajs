@@ -9,11 +9,19 @@ body {
    -------------------------------------------------- */
 body {
     background-color: #fff;
-    padding-top: 20px;
+}
+
+.container {
+    padding-left: 90px;
+    padding-right: 90px;
 }
 
 a {
     color: #00B7FF;
+}
+
+.img-home {
+    width: 100%;
 }
 
 /* Awesome icons
@@ -26,8 +34,33 @@ a > i {
 
 /* navbar
   --------------------------------------------------- */
+.nav.navbar-default {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
 .navbar-collapse {
     padding-right: 0px;
+}
+.navbar-default .navbar-brand {
+    color: #4f4f4f;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-family: JennaSue;
+    font-size: 60px;
+}
+.nav-active {
+    font-weight: 400;
+}
+.nav ul.nav.navbar-nav li a {
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 17px;
+    color: #606060;
+    padding-left: 50px;
+    padding-right: 0px;
+}
+.nav ul.nav.navbar-nav li a:hover {
+    color: #8f8f8f;
 }
 /* Sticky footer
    -------------------------------------------------- */
@@ -50,4 +83,7 @@ body {
 }
 .footer p {
     line-height: 1.0;
+}
+.footer-space {
+    padding-top: 30px;
 }

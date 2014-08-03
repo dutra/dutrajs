@@ -1,4 +1,12 @@
-
+mixin navli(item, path)
+  li
+    a(href=path)
+      if view == item
+        span.nav-active
+          block
+      else
+        block
+      
 .nav.navbar-default(role="navigation")
   .container
 
@@ -7,16 +15,9 @@
 
     .collapse.navbar-collapse.navbar-right
       ul.nav.navbar-nav
-        li
-          a(href="/") home
-        li
-          a(href="#") about
-        li
-          a(href="#") projects
-        li
-          a(href="/photos") photos
-        li
-          a(href="#") contact
-      
-        
+        +navli('index', '/') home
+        +navli('about', '/about') about
+        +navli('projects', '#') projects
+        +navli('photos', '/photos') photos
+        +navli('contact', '#') contact
       
