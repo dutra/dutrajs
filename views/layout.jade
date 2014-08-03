@@ -5,7 +5,7 @@ html
     
     meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
 
-    each vendor_stylesheet in  ['bootstrap', 'bootstrap-theme', 'font-awesome.min', 'nanogallery_clean']
+    each vendor_stylesheet in  ['bootstrap', 'bootstrap-theme', 'font-awesome.min']
       link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/'+ vendor_stylesheet + '.css')
       
     link(rel='stylesheet', type='text/css', media='all' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Lato:100,300,400|Roboto:100,300,400')
@@ -23,7 +23,7 @@ html
 
       include footer
         
-    each vendor_script in ['jquery-2.1.1', 'bootstrap', 'imagesloaded.pkgd.min', 'jquery.nanogallery.min']
+    each vendor_script in ['jquery-2.1.1', 'bootstrap']
       script(type='text/javascript', src='/javascripts/vendor/'+vendor_script+'.js')
 
     block scripts

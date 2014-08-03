@@ -12,11 +12,18 @@ $(document).ready(function() {
 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under	<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
     }).addTo(map);
 
+    var markers = L.markerClusterGroup();
+    
     $.getJSON("/travel/scenes", function(data) {
 	data.forEach(function(element) {
+	    
 	    console.dir(element);
-	    L.marker(element.coords).addTo(map);
+	    var marker = L.marker(element.coords, {title: element.name});
+	    marker.bindPopup(element.name);
+	    markers.addLayer(marker);
 	});
+	map.addLayer(markers);
     });
+    
     
 });
