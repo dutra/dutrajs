@@ -1,3 +1,9 @@
+mixin subnavli(path)
+  li
+    a(href=path)
+      block
+      
+
 extends layout
 
 block content
@@ -5,4 +11,7 @@ block content
   .container
     .row
       .col-sm-12
-            
+        ul.subnav
+          li.page ABOUT
+          +subnavli('#') hello
+          +subnavli('#') hallo

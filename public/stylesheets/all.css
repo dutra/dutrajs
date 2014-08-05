@@ -1,7 +1,7 @@
 /* Typography
    -------------------------------------------------- */
 body {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-size: 15px;
     line-height: 1.42;
 }
@@ -13,6 +13,9 @@ body {
 
 a {
     color: #00B7FF;
+}
+a:hover {
+    text-decoration: none;
 }
 
 .img-home {
@@ -35,12 +38,53 @@ a > i {
 
 /* navbar
   --------------------------------------------------- */
+.subnav a {
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 17px;
+    color: #606060;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.subnav a:hover {
+    text-decoration: none;
+}
+.subnav li:before {
+    content: '/';
+}
+ul.subnav {
+    padding-left: 0px;
+    margin-bottom: 40px;
+    font-family: 'Open Sans';
+}
+.subnav li.page:before {
+    content: '';
+}
+.subnav li.page {
+    padding-left: 0px;
+    padding-right: 20px;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 27px;
+    color: #a0a0a0;
+}
+.subnav li {
+    display: inline-block;
+}
+.subnav-active {
+    font-weight: 400;
+}
+
+.nav.nav-pills a:hover {
+    background-color: #fff;
+}
 .red-dot {
     color: #C86603;
 }
 .nav.navbar-default {
     padding-top: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
+    font-family: 'Open Sans';
 }
 .navbar-collapse {
     padding-right: 0px;
@@ -60,8 +104,10 @@ a > i {
     font-weight: 300;
     font-size: 17px;
     color: #606060;
-    padding-left: 50px;
+    margin-left: 50px;
+    margin-right: 0px;
     padding-right: 0px;
+    padding-left: 0px;
 }
 .nav ul.nav.navbar-nav li a:hover {
     color: #8f8f8f;
@@ -77,6 +123,7 @@ body {
     margin-bottom: 100px;
 }
 .footer {
+    font-family: 'Open Sans';
     position: absolute;
     bottom: 0;
     width: 100%;

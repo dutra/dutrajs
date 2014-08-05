@@ -19,7 +19,11 @@ $(document).ready(function() {
 	    
 	    console.dir(element);
 	    var marker = L.marker(element.coords, {title: element.name});
-	    marker.bindPopup(element.name);
+	    
+	    var popup_content = '<p><strong>'+element.name+'</strong></p>'
+		+ '<p>'+element.description+'</p>';
+	    marker.bindPopup(popup_content);
+
 	    markers.addLayer(marker);
 	});
 	map.addLayer(markers);

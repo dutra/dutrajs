@@ -1,0 +1,17 @@
+
+mixin subnavli(item, path)
+  li
+    a(href=path)
+      if subview == item
+        span.subnav-active
+          block
+      else
+        block
+.container
+  .row
+    .col-sm-12
+      ul.subnav
+        li.page.text-uppercase= subview
+        +subnavli('intro', '/about/intro') intro
+        +subnavli('hobbies', '/about/hobbies') hobbies
+        +subnavli('faq', '/about/faq') faq

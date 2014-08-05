@@ -1,0 +1,27 @@
+mixin subnavli(path)
+  li
+    a(href=path)
+      block
+      
+
+extends layout
+
+block content
+
+  include about_header
+
+  .container
+    .row
+      .col-sm-9
+
+        p.lead Hello there. I am Isaque.
+        p I am a college senior studying Computer Science and Physics at the 
+          a(href="http://mit.edu") Massachusetts Institute of Technology.
+        p I am originally from a small village in Minas Gerais, Brasil. I grew up surrounded by boundless green hills and starry skies. My homepage picture was taken on my native land.
+          
+        p Five years ago I left behind my homeland in order to pursue my studies.
+        p During my spare time, I am an avid Archlinux user, developer, amateur astronomer and cheese maker. I update this website when I can; feel free to explore it.
+
+
+      .col-sm-3
+//        img.img-responsive.img-home(src="http://static.dutra.io/images/about_intro.jpg")

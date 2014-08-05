@@ -1,0 +1,36 @@
+mixin subnavli(path)
+  li
+    a(href=path)
+      block
+      
+
+extends layout
+
+block content
+
+  include about_header
+
+  .container
+    .row
+      .col-sm-9
+
+        dl
+          dt This website
+          dl This website was written using the 
+            a(href="http://expressjs.com") express.js 
+            | framework and it runs on top of 
+            a(href="http://nodejs.org") node.js. 
+            | I also use 
+            a(href="http://nginx.org") nginx 
+            | as a reverse proxy and static file server as well.
+            br
+            | My data is served by 
+            a(href="http://rethinkdb.com") RethinkDB 
+            | and distributed among 3 shards and 6 replication nodes running on top of 6 physical servers that I manage for other personal projects. 
+            br
+            | My domain dutra.io was registered with 
+            a(href="http://namecheap.com") Namecheap. 
+            | I have only great things to say about all these tools.
+          
+      .col-sm-3
+//        img.img-responsive.img-home(src="http://static.dutra.io/images/about_intro.jpg")
