@@ -4,10 +4,15 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var _ = require('lodash');
+var Waterline = require('waterline');
+var rethinkdbAdapter = require('./models/adapter');
 
 global.__base = __dirname + '/';
 
+var config = require('./config');
 
+// routes
 var routes = require('./routes/index');
 var about = require('./routes/about');
 var photos = require('./routes/photos');
@@ -27,6 +32,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use('/', routes);
 app.use('/about', about);
@@ -62,6 +69,30 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+
+// set up ORM
+// Instantiate a new instance of the ORM
+var orm = new Waterline();
+
+// Load the Models into the ORM
+orm.loadCollection(require('./models/photo'));
+
+orm.initialize(config, function(err, models) {
+    if(err) throw err;
+
+    app.models = models.collections;
+    app.connections = models.connections;
+
+    function capitaliseFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    _.each(app.models, function(model, key) {
+        global[capitaliseFirstLetter(key)] = model;
+    });
+
 });
 
 

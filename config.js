@@ -1,9 +1,18 @@
+var rethinkdbAdapter = require(__base + '/models/adapter');
+
 module.exports = {
-    rethinkdb: {
-        host: "db.dutra.io",
-        port: 28015,
-        authKey: "",
-        db: "dutrajs"
+    adapters: {
+        'default': rethinkdbAdapter,
+        rethinkdb: rethinkdbAdapter
+    },
+    connections: {
+        rethinkdb: {
+	    adapter: 'rethinkdb',
+            host: "db.dutra.io",
+            port: 28015,
+            authKey: "",
+            db: "dutrajs"
+        }
     },
     express: {
         port: 3000
