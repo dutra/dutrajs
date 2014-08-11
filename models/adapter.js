@@ -9,7 +9,7 @@
 
 var _ = require('lodash');
 var r = require('rethinkdb');
-
+var async = require('async');
 
 
 /**
@@ -198,11 +198,11 @@ module.exports = (function () {
          *
          */
         find: function (connection, collection, options, cb) {
-	    console.log("FIND!");
+	    console.log("FIND! "+JSON.stringify(options));
+	    console.log("FIND! "+JSON.stringify(collection));
 	    var conn = connections[connection];
 	    // sails.log.warn('FIND');
 
-	    console.log(options.where);
 	    // sails.log.debug('FIND: ', collection, options);
 	    r.table(collection).filter(options.where).run(conn, function(err, cursor) {
 		if(err) {
@@ -220,7 +220,50 @@ module.exports = (function () {
 
         },
 							  
+	join: function (conn, coll, criteria, sb) {
+	    console.log('JOIN! coll: ' + JSON.stringify(coll));
+	    console.log('JOIN! criteria: ' + JSON.stringify(criteria));
+	    console.log('JOIN! conn: ' + JSON.stringify(conn));
+	    console.log('JOIN! sb: ' + JSON.stringify(sb));
+	    console.dir(sb);
+	    var conn = connections[conn];
+	    var parent = r.table(coll).get(criteria.where.id);
+	    
+	    async.each(criteria.joins, function(item, callback) {
+		
+		var children = r.table(item.child).getAll(criteria.where.id, {index: item.childKey}).run(conn, function(err, cursor) {
+		    if(err)
+			return callback(err);
+		    cursor.toArray(function(err, results) {
+			if(err)
+			    return callback(err);
+			var childrenObject = new Object();
+			childrenObject[item.alias] = results;
+			parent = parent.merge(childrenObject);
+			console.log(results);
+			callback(null);
+		    });
+		});
+	    }, function(err) {
+		if(err)
+		    return sb(err);
+		parent.run(conn, function(err, result) {
+		    if(err)
+			return sb(err);
+		    // cursor.toArray(function(err, results) {
+		    // 	if(err)
+		    // 	    return sb(err);
+		    // 	return sb(results);
+		    // });
+		    console.log('RESULT: ' + JSON.stringify(result));
+		    console.log('SB: '+JSON.stringify(sb));
+		    return sb.success(result);
 
+		    
+		});
+	    });
+	},
+	
         create: function (connection, collection, values, cb) {
 	    var conn = connections[connection];
 	    // sails.log.warn('CREATE', values);

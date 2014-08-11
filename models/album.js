@@ -3,11 +3,11 @@ var Waterline = require('waterline');
 
 
 
-var Photo = Waterline.Collection.extend({
-    identity: 'photo',
+var Album = Waterline.Collection.extend({
+    identity: 'album',
     
     // Define a custom table name
-    tableName: 'photo',
+    tableName: 'album',
 
     // Set schema true/false for adapters that support schemaless
     schema: false,
@@ -24,18 +24,19 @@ var Photo = Waterline.Collection.extend({
 	},
 	title: {
             type: 'string',
-
             // also accepts any validations
             required: true
         },
 	description: {
 	    type: 'string'
 	},
-	owner: {
-	    model: 'album'
+	photos: {
+	    collection: 'photo',
+	    via: 'owner'
 	}
+	    
     }
 });
 
 
-module.exports = Photo;
+module.exports = Album;
