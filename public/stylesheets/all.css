@@ -22,6 +22,20 @@ a:hover {
     width: 100%;
 }
 
+/* Photo
+   -------------------------------------------------- */
+.title {
+    padding-left: 0px;
+    padding-right: 20px;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 27px;
+    color: #a0a0a0;
+}
+img.img-photo {
+    margin-bottom: 30px;
+}
+
 /* Map
    -------------------------------------------------- */
 #map {

@@ -32,7 +32,6 @@ router.get('/:id', function(req, res, next) {
         else if (!album) {
             return next(new Error('failed to load album'));
         }
-	console.log('ALBUM: '+album);
 	res.json(album);
     });
 });

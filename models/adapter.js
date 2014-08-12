@@ -213,6 +213,7 @@ module.exports = (function () {
 		cursor.toArray(function(err, result) {
 		    if(err) return cb(err);
 		    // sails.log.debug('Cursor: ', result);
+		    console.log("Cursor Result: "+JSON.stringify(result));
 		    return cb(null, result);
 		});
 

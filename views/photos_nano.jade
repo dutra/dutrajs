@@ -1,17 +1,14 @@
-
 extends layout
 
 block stylesheets
     link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/nanogallery_clean.css')
  
 block scripts
+  script(type='text/javascript', src='/javascripts/vendor/imagesloaded.pkgd.min.js')
+  script(type='text/javascript', src='/javascripts/vendor/jquery.nanogallery.min.js')
   script(type='text/javascript', src='/javascripts/photos.js')
 
 block content
 
   .container
-    .row
-      .col-sm-12
-        if photo_id
-          img.img-responsive.img-home(src='http://static.dutra.io/photos/'+album_id+'/'+photo_id+'.jpg');
-          
+    #gallery

@@ -26,15 +26,15 @@ router.param('id', /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12
 
 router.get('/:id', function(req, res) {
     
-    Photo.find({id: req.params.id}).exec(function(err, photo){
+    Photo.findOne({id: req.params.id}).exec(function(err, photo){
         if (err) {
             return next(err);
         }
         else if (!photo) {
-            return next(new Error('failed to load photo'));
+            return next();
         }
-
-     res.json(photo);
+	console.log(JSON.stringify(photo));
+	res.render('photo', { photo: photo });
     });
 });
 
