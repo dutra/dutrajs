@@ -36,6 +36,21 @@ var Photo = Waterline.Collection.extend({
 	},
 	scene_id: {
 	    model: 'scene'
+	},
+	apperture: {
+	    type: 'string'
+	},
+	exposure_time: {
+	    type: 'string'
+	},
+	focal_length: {
+	    type: 'string'
+	},
+	iso: {
+	    type: 'string'
+	},
+	coords: {
+	    type: 'array'
 	}
 
     }

@@ -33,7 +33,7 @@ router.get('/:id', function(req, res) {
         else if (!photo) {
             return next();
         }
-	Scene.findOne({id: photo.scene_id}).exec(function(err, scene) {
+	Scene.findOne({id: photo.scene_id}).populate('photos').exec(function(err, scene) {
 	    if (err)
 		return next(err);
 	    console.log(JSON.stringify(photo));

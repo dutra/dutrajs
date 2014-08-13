@@ -35,6 +35,15 @@ a:hover {
 img.img-photo {
     margin-bottom: 20px;
 }
+.photo-bar {
+    z-index: 2;
+    padding: 14px 30px 0 0px;
+    right: 0px;
+    position: absolute;
+}
+.photo-bar > a > i {
+    color: #fff;
+}
 .description {
     font-weight: 400;
     padding-left: 0px;
@@ -43,11 +52,18 @@ img.img-photo {
     font-weight: 300;
     font-size: 18px;    
 }
-.exif {
 
-}
 .text-bold {
     font-weight: 400;
+}
+.popup {
+    font-size: 11px;
+}
+.img-popup {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    width: 100px;
 }
 
 /* Map
@@ -58,7 +74,9 @@ img.img-photo {
 #map-photo {
     width: 100%;
 }
-
+.list-group-item:first-child, .list-group-item:last-child {
+//    border-radius: 0px;
+}
 /* Awesome icons
    -------------------------------------------------- */
 a > i {

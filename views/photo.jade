@@ -20,10 +20,48 @@ block content
     .row
       .col-sm-12
         if photo
-          img.img-responsive.img-photo(src='http://static.dutra.io/photos/'+photo.album_id+'/'+photo.id+'.jpg')
+          .img-main-photo
+            .photo-bar
+              a(download='"'+photo.title+'.jpg"', href='http://static.dutra.io/photos/'+photo.album_id+'/'+photo.id+'.jpg')
+                i.fa.fa-download.fa-2x
+            img.img-responsive.img-photo(src='http://static.dutra.io/photos/'+photo.album_id+'/'+photo.id+'_large.jpg')
     .row
-      .col-sm-8
+      .col-sm-12
         p.title= photo.title
         p.description= photo.description
-      .col-sm-4
+      
+    .row
+      .col-sm-3
+        .list-group
+          if photo.aperture
+            .list-group-item
+              strong Aperture: 
+              | f/
+              = photo.aperture
+          if photo.exposure_time
+            .list-group-item
+              strong Exposure time: 
+              = photo.exposure_time
+          if photo.focal_length
+            .list-group-item
+              strong Focal length: 
+              = photo.focal_length
+              |  mm
+          if photo.iso
+            .list-group-item
+              strong ISO: 
+              = photo.iso
+      .col-sm-3
+        .list-group
+          .list-group-item
+            strong= scene.name
+          .list-group-item
+            = scene.address
+          .list-group-item
+            strong Latitude: 
+            = photo.coords[0]
+          .list-group-item
+            strong Longitude: 
+            = photo.coords[1] 
+      .col-sm-6               
         #map-photo
