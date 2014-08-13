@@ -18,6 +18,7 @@ var routes = require('./routes/index');
 var about = require('./routes/about');
 var photos = require('./routes/photos');
 var albums = require('./routes/albums');
+var scenes = require('./routes/scenes');
 var users = require('./routes/users');
 var travel = require('./routes/travel');
 
@@ -41,8 +42,9 @@ app.use('/', routes);
 app.use('/about', about);
 app.use('/photos', photos);
 app.use('/albums', albums);
+app.use('/scenes', scenes);
 app.use('/users', users);
-app.use('/travel', travel);
+//app.use('/travel', travel);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -82,6 +84,7 @@ var orm = new Waterline();
 // Load the Models into the ORM
 orm.loadCollection(require('./models/photo'));
 orm.loadCollection(require('./models/album'));
+orm.loadCollection(require('./models/scene'));
 
 orm.initialize(config, function(err, models) {
     if(err) throw err;

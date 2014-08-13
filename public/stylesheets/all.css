@@ -33,12 +33,29 @@ a:hover {
     color: #a0a0a0;
 }
 img.img-photo {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+.description {
+    font-weight: 400;
+    padding-left: 0px;
+    padding-right: 20px;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 18px;    
+}
+.exif {
+
+}
+.text-bold {
+    font-weight: 400;
 }
 
 /* Map
    -------------------------------------------------- */
 #map {
+    width: 100%;
+}
+#map-photo {
     width: 100%;
 }
 

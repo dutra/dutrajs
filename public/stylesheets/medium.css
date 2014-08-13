@@ -7,5 +7,8 @@
 	padding-left: 90px;
 	padding-right: 90px;
     }
+    #map-photo {
+	height: 200px;
+    }
 
 }

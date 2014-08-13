@@ -7,7 +7,7 @@ var Album = Waterline.Collection.extend({
     identity: 'album',
     
     // Define a custom table name
-    tableName: 'album',
+    tableName: 'albums',
 
     // Set schema true/false for adapters that support schemaless
     schema: false,
@@ -32,7 +32,7 @@ var Album = Waterline.Collection.extend({
 	},
 	photos: {
 	    collection: 'photo',
-	    via: 'owner'
+	    via: 'album_id'
 	}
 	    
     }

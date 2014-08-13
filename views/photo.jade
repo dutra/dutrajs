@@ -2,10 +2,17 @@
 extends layout
 
 block stylesheets
-    link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/nanogallery_clean.css')
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/leaflet.css')
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/MarkerCluster.css')
  
 block scripts
-  script(type='text/javascript', src='/javascripts/photos.js')
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.js')
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.markercluster.js')
+  
+  script(type='text/javascript').
+    var photo = !{JSON.stringify(photo)}
+    var scene = !{JSON.stringify(scene)}
+  script(type='text/javascript', src='/javascripts/photo.js')
 
 block content
 
@@ -13,9 +20,10 @@ block content
     .row
       .col-sm-12
         if photo
-          img.img-responsive.img-photo(src='http://static.dutra.io/photos/'+photo.owner+'/'+photo.id+'.jpg')
+          img.img-responsive.img-photo(src='http://static.dutra.io/photos/'+photo.album_id+'/'+photo.id+'.jpg')
     .row
       .col-sm-8
-        span.title= photo.title
-      
-        
+        p.title= photo.title
+        p.description= photo.description
+      .col-sm-4
+        #map-photo
