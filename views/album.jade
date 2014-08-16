@@ -1,0 +1,24 @@
+
+extends layout
+
+block stylesheets
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/leaflet.css')
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/MarkerCluster.css')
+ 
+block scripts
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.js')
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.markercluster.js')
+  
+  script(type='text/javascript').
+    var album = !{JSON.stringify(album)}
+  script(type='text/javascript', src='/javascripts/album.js')
+
+block content
+
+  .container
+    .row
+     - for (var x = 0; x < photos.length; x++)
+      .col-sm-3
+        //= JSON.stringify(photos[x])
+        a(href="/photos/"+photos[x].id)
+          img.img-responsive(src='http://static.dutra.io/photos/'+album.id+'/'+photos[x].id+'_square.jpg')

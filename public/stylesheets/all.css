@@ -53,6 +53,21 @@ img.img-photo {
     font-size: 18px;    
 }
 
+/* Album
+   ------------------------------------------------ */
+.album-title {
+    padding-top: 10px;
+    padding-left: 15px;
+    text-transform: uppercase;
+    color: #000;
+    font-size: 18px;
+    font-weight: 100;
+    font-family: 'Roboto';
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+}
+
 .text-bold {
     font-weight: 400;
 }

@@ -4,7 +4,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('albums', { title: 'albums', view: 'albums' });
+    Album.find({}).exec(function(err, albums) {
+	console.log(JSON.stringify(albums));
+	res.render('albums', { title: 'albums', view: 'albums', albums: albums });
+
+    });
+ 
 });
 
 router.param(function(name, fn){
@@ -25,14 +30,15 @@ router.param(function(name, fn){
 router.param('id', /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i); 
 
 router.get('/:id', function(req, res, next) {
-    Album.find({id: req.params.id}).populate('photos').exec(function(err, album){
+    Album.findOne({id: req.params.id}).populate('photos').exec(function(err, album){
         if (err) {
             return next(err);
         }
         else if (!album) {
             return next(new Error('failed to load album'));
         }
-	res.json(album);
+	logger.info(JSON.stringify(album));
+	res.render('album', { album: album, photos: album.photos });
     });
 });
 

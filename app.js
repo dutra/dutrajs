@@ -1,13 +1,16 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
-var logger = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
 var changeCase = require('change-case');
 var Waterline = require('waterline');
 var rethinkdbAdapter = require('./models/adapter');
+var logger = require('./logger');
+
+global.logger = logger;
 
 global.__base = __dirname + '/';
 
@@ -30,7 +33,7 @@ app.set('view engine', 'jade');
 app.engine('html', require('ejs').renderFile);
 
 app.use(favicon());
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());

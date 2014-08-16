@@ -108,7 +108,7 @@ module.exports = (function () {
                db: 'landjs',
                adapter: 'rethinkdb',
                identity: 'rethinkDB' } */
-	    console.log("RegisterConnection!");
+
             if(!connection.identity) return cb(new Error('Connection is missing an identity.'));
             if(connections[connection.identity]) return cb(new Error('Connection is already registered.'));
 
@@ -122,7 +122,8 @@ module.exports = (function () {
                 }
                 else {
                     connections[connection.identity] = conn;
-		    // sails.log.info("RethinkDB connection established with success.");
+                    logger.info("RethinkDB connection established with success.");
+
                     cb();
                 }
             });
@@ -139,8 +140,8 @@ module.exports = (function () {
          */
         // Teardown a Connection
         teardown: function (conn, cb) {
-	    // sails.log.warn('TEARDOWN');
-	    // sails.log.debug(conn);
+            // sails.log.warn('TEARDOWN');
+            // sails.log.debug(conn);
             if (typeof conn == 'function') {
                 cb = conn;
                 conn = null;
@@ -150,7 +151,7 @@ module.exports = (function () {
                 return cb();
             }
             if(!connections[conn]) return cb();
-	    connections[conn].close();
+            connections[conn].close();
             delete connections[conn];
             cb();
         },
@@ -158,7 +159,7 @@ module.exports = (function () {
 
         // Return attributes
         describe: function (connection, collection, cb) {
-	    // sails.log.warn('DESCRIBE');
+            // sails.log.warn('DESCRIBE');
             // Add in logic here to describe a collection (e.g. DESCRIBE TABLE logic)
             return cb();
         },
@@ -170,7 +171,7 @@ module.exports = (function () {
          *
          */
         define: function (connection, collection, definition, cb) {
-	    // sails.log.warn('DEFINE');
+            // sails.log.warn('DEFINE');
             // Add in logic here to create a collection (e.g. CREATE TABLE logic)
             return cb();
         },
@@ -182,7 +183,7 @@ module.exports = (function () {
          *
          */
         drop: function (connection, collection, relations, cb) {
-	    // sails.log.warn('DROP');
+            // sails.log.warn('DROP');
             // Add in logic here to delete a collection (e.g. DROP TABLE logic)
             return cb();
         },
@@ -198,97 +199,113 @@ module.exports = (function () {
          *
          */
         find: function (connection, collection, options, cb) {
-	    console.log("FIND! "+JSON.stringify(options));
-	    console.log("FIND! "+JSON.stringify(collection));
-	    var conn = connections[connection];
-	    // sails.log.warn('FIND');
+            console.log("FIND! "+JSON.stringify(options));
+            console.log("FIND! "+JSON.stringify(collection));
+            var conn = connections[connection];
+            // sails.log.warn('FIND');
 
-	    // sails.log.debug('FIND: ', collection, options);
-	    r.table(collection).filter(options.where).run(conn, function(err, cursor) {
-		if(err) {
-		    console.log("Err: "+err);
-		    console.dir(cb);
-		    return cb(err);
-		}
-		cursor.toArray(function(err, result) {
-		    if(err) return cb(err);
-		    // sails.log.debug('Cursor: ', result);
-		    console.log("Cursor Result: "+JSON.stringify(result));
-		    return cb(null, result);
-		});
+            if(options.where) {
 
-	    });
+                // sails.log.debug('FIND: ', collection, options);
+                r.table(collection).filter(options.where).run(conn, function(err, cursor) {
+                    if(err) {
+                        console.log("Err: "+err);
+                        console.dir(cb);
+                        return cb(err);
+                    }
+                    cursor.toArray(function(err, result) {
+                        if(err) return cb(err);
+                        // sails.log.debug('Cursor: ', result);
+                        console.log("Cursor Result: "+JSON.stringify(result));
+                        return cb(null, result);
+                    });
+
+                });
+            } else {
+                r.table(collection).run(conn, function(err, cursor) {
+                    if(err)
+                        return cb(err);
+                    cursor.toArray(function(err, result) {
+                        if(err) return cb(err);
+                        // sails.log.debug('Cursor: ', result);
+                        console.log("Cursor Result: "+JSON.stringify(result));
+                        return cb(null, result);
+                    });
+
+                });
+            }
+
 
         },
-							  
-	join: function (conn, coll, criteria, sb) {
-	    console.log('JOIN! coll: ' + JSON.stringify(coll));
-	    console.log('JOIN! criteria: ' + JSON.stringify(criteria));
-	    console.log('JOIN! conn: ' + JSON.stringify(conn));
-	    console.log('JOIN! sb: ' + JSON.stringify(sb));
-	    console.dir(sb);
-	    var conn = connections[conn];
-	    var parent = r.table(coll).get(criteria.where.id);
-	    
-	    async.each(criteria.joins, function(item, callback) {
-		
-		var children = r.table(item.child).getAll(criteria.where.id, {index: item.childKey}).run(conn, function(err, cursor) {
-		    if(err)
-			return callback(err);
-		    cursor.toArray(function(err, results) {
-			if(err)
-			    return callback(err);
-			var childrenObject = new Object();
-			childrenObject[item.alias] = results;
-			parent = parent.merge(childrenObject);
-			console.log(results);
-			callback(null);
-		    });
-		});
-	    }, function(err) {
-		if(err)
-		    return sb(err);
-		parent.run(conn, function(err, result) {
-		    if(err)
-			return sb(err);
-		    // cursor.toArray(function(err, results) {
-		    // 	if(err)
-		    // 	    return sb(err);
-		    // 	return sb(results);
-		    // });
-		    console.log('RESULT: ' + JSON.stringify(result));
-		    console.log('SB: '+JSON.stringify(sb));
-		    return sb.success(result);
 
-		    
-		});
-	    });
-	},
-	
+        join: function (conn, coll, criteria, sb) {
+            console.log('JOIN! coll: ' + JSON.stringify(coll));
+            console.log('JOIN! criteria: ' + JSON.stringify(criteria));
+            console.log('JOIN! conn: ' + JSON.stringify(conn));
+            console.log('JOIN! sb: ' + JSON.stringify(sb));
+            console.dir(sb);
+            var conn = connections[conn];
+            var parent = r.table(coll).get(criteria.where.id);
+
+            async.each(criteria.joins, function(item, callback) {
+
+                var children = r.table(item.child).getAll(criteria.where.id, {index: item.childKey}).run(conn, function(err, cursor) {
+                    if(err)
+                        return callback(err);
+                    cursor.toArray(function(err, results) {
+                        if(err)
+                            return callback(err);
+                        var childrenObject = new Object();
+                        childrenObject[item.alias] = results;
+                        parent = parent.merge(childrenObject);
+                        console.log(results);
+                        callback(null);
+                    });
+                });
+            }, function(err) {
+                if(err)
+                    return sb(err);
+                parent.run(conn, function(err, result) {
+                    if(err)
+                        return sb(err);
+                    // cursor.toArray(function(err, results) {
+                    //  if(err)
+                    //      return sb(err);
+                    //  return sb(results);
+                    // });
+                    console.log('RESULT: ' + JSON.stringify(result));
+                    console.log('SB: '+JSON.stringify(sb));
+                    return sb.success(result);
+
+
+                });
+            });
+        },
+
         create: function (connection, collection, values, cb) {
-	    var conn = connections[connection];
-	    // sails.log.warn('CREATE', values);
+            var conn = connections[connection];
+            // sails.log.warn('CREATE', values);
 
-	    r.table(collection).insert(values).run(conn, function(err, result) {
-		if(err)
-	    	    return cb(err);
-		// sails.log.debug('CREATE: ', result);
-		return cb(null, result);
-	    });
-	    
+            r.table(collection).insert(values).run(conn, function(err, result) {
+                if(err)
+                    return cb(err);
+                // sails.log.debug('CREATE: ', result);
+                return cb(null, result);
+            });
+
         },
 
         update: function (connection, collection, options, values, cb) {
-	    // sails.log.warn('UPDATE');
-	    
+            // sails.log.warn('UPDATE');
+
             return cb();
         },
 
         destroy: function (connection, collection, options, values, cb) {
-	    // sails.log.warn('DESTROY');
+            // sails.log.warn('DESTROY');
             return cb();
         },
-	
+
         /*
 
         // Custom methods defined here will be available on all models
@@ -316,7 +333,7 @@ module.exports = (function () {
         // Sparrow.foo(...)
         // Sparrow.bar(...)
 
-	
+
         // Example success usage:
         //
         // (notice how the first argument goes away:)
