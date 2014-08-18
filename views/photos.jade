@@ -2,16 +2,23 @@
 extends layout
 
 block stylesheets
-    link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/nanogallery_clean.css')
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/leaflet.css')
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/MarkerCluster.css')
  
 block scripts
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.js')
+  script(type='text/javascript', src='/javascripts/vendor/leaflet.markercluster.js')
+  
+  script(type='text/javascript').
+    var photos = !{JSON.stringify(photos)}
   script(type='text/javascript', src='/javascripts/photos.js')
 
 block content
 
   .container
     .row
-      .col-sm-12
-        if photo_id
-          img.img-responsive.img-home(src='http://static.dutra.io/photos/'+album_id+'/'+photo_id+'.jpg');
-          
+     - for (var x = 0; x < photos.length; x++)
+      .col-sm-2
+        //= JSON.stringify(photos[x])
+        a(href="/photos/"+photos[x].id)
+          img.img-responsive.img-tile(src='http://static.dutra.io/photos/'+photos[x].album_id+'/'+photos[x].id+'_square.jpg')

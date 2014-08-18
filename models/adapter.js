@@ -204,37 +204,27 @@ module.exports = (function () {
             var conn = connections[connection];
             // sails.log.warn('FIND');
 
-            if(options.where) {
+            var query =  r.table(collection);
 
+            if(options.where)
                 // sails.log.debug('FIND: ', collection, options);
-                r.table(collection).filter(options.where).run(conn, function(err, cursor) {
-                    if(err) {
-                        console.log("Err: "+err);
-                        console.dir(cb);
-                        return cb(err);
-                    }
-                    cursor.toArray(function(err, result) {
-                        if(err) return cb(err);
-                        // sails.log.debug('Cursor: ', result);
-                        console.log("Cursor Result: "+JSON.stringify(result));
-                        return cb(null, result);
-                    });
-
+                query = query.filter(options.where);
+	    if(options.sort)
+		for(var k in options.sort)
+		    query = query.orderBy({index: k});
+	    
+            query.run(conn, function(err, cursor) {
+                if(err)
+                    return cb(err);
+                cursor.toArray(function(err, result) {
+                    if(err) return cb(err);
+                    // sails.log.debug('Cursor: ', result);
+                    console.log("Cursor Result: "+JSON.stringify(result));
+                    return cb(null, result);
                 });
-            } else {
-                r.table(collection).run(conn, function(err, cursor) {
-                    if(err)
-                        return cb(err);
-                    cursor.toArray(function(err, result) {
-                        if(err) return cb(err);
-                        // sails.log.debug('Cursor: ', result);
-                        console.log("Cursor Result: "+JSON.stringify(result));
-                        return cb(null, result);
-                    });
 
-                });
-            }
 
+            });
 
         },
 

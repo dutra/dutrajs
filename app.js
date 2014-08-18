@@ -47,7 +47,7 @@ app.use('/photos', photos);
 app.use('/albums', albums);
 app.use('/scenes', scenes);
 app.use('/users', users);
-//app.use('/travel', travel);
+app.use('/travel', travel);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

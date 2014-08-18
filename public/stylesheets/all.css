@@ -52,6 +52,9 @@ img.img-photo {
     font-weight: 300;
     font-size: 18px;    
 }
+.img-tile {
+    margin-bottom: 30px;
+}
 
 /* Album
    ------------------------------------------------ */
@@ -67,7 +70,10 @@ img.img-photo {
     top: 0px;
     z-index: 1;
 }
-
+#map-album {
+    height: 150px;
+    margin-bottom: 20px;
+}
 .text-bold {
     font-weight: 400;
 }

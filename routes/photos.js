@@ -4,7 +4,15 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('photos', { title: 'photos', view: 'photos' });
+    Photo.find().sort({album_id: 'asc'}).exec(function(err, photos) {
+        if(err)
+            next(err);
+        console.log(JSON.stringify(photos));
+//	res.json(photos);
+       res.render('photos', { title: 'photos', view: 'photos', photos: photos });
+
+    });
+
 });
 
 router.param(function(name, fn){
@@ -32,6 +40,9 @@ router.get('/:id', function(req, res) {
         }
         else if (!photo) {
             return next();
+
+
+	    
         }
 	Scene.findOne({id: photo.scene_id}).populate('photos').exec(function(err, scene) {
 	    if (err)

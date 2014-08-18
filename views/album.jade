@@ -11,14 +11,18 @@ block scripts
   
   script(type='text/javascript').
     var album = !{JSON.stringify(album)}
+    var photos = !{JSON.stringify(photos)}
   script(type='text/javascript', src='/javascripts/album.js')
 
 block content
 
   .container
     .row
+      .col-sm-12
+        #map-album
+    .row
      - for (var x = 0; x < photos.length; x++)
       .col-sm-3
         //= JSON.stringify(photos[x])
         a(href="/photos/"+photos[x].id)
-          img.img-responsive(src='http://static.dutra.io/photos/'+album.id+'/'+photos[x].id+'_square.jpg')
+          img.img-responsive.img-tile(src='http://static.dutra.io/photos/'+album.id+'/'+photos[x].id+'_square.jpg')
