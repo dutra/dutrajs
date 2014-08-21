@@ -39,16 +39,13 @@ router.get('/:id', function(req, res) {
             return next(err);
         }
         else if (!photo) {
-            return next();
-
-
-	    
+            return next();	    
         }
 	Scene.findOne({id: photo.scene_id}).populate('photos').exec(function(err, scene) {
 	    if (err)
 		return next(err);
 	    console.log(JSON.stringify(photo));
-	    res.render('photo', { photo: photo, scene: scene });
+	    res.render('photo', { title: photo.title, photo: photo, scene: scene });
 	});
     });
 });

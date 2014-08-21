@@ -31,6 +31,9 @@ var Photo = Waterline.Collection.extend({
 	description: {
 	    type: 'string'
 	},
+	date: {
+	    type: 'datetime'
+	},
 	album_id: {
 	    model: 'album'
 	},
