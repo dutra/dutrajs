@@ -295,6 +295,32 @@ module.exports = (function () {
             // sails.log.warn('DESTROY');
             return cb();
         },
+	getNearest: function(connection, collection, coord, options, cb) {
+	    var conn = connections[connection];
+            // sails.log.warn('FIND');
+
+            var query = r.table(collection);
+
+	    console.log('neartest! coll: ' + JSON.stringify(collection));
+            console.log('neartest! values  : ' + JSON.stringify(coord));
+            console.log('neartest! options : ' + JSON.stringify(options));
+            console.log('neartest! sb: ' + cb);
+
+	    query = query.getNearest(coord, options);
+	    
+	    query.run(conn, function(err, cursor) {
+                if(err)
+                    return cb(err);
+                cursor.toArray(function(err, results) {
+                    if(err)
+			return cb(err);
+                    console.log("Cursor Result: "+JSON.stringify(results));
+                    return cb(null, results);
+                });
+
+	    });
+	},
+	
 
         /*
 

@@ -33,7 +33,8 @@ var Scene = Waterline.Collection.extend({
 	photos: {
 	    collection: 'photo',
 	    via: 'scene_id'
-	}
+	},
+	coords: 'array'
 	    
     }
 });

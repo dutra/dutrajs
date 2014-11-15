@@ -18,7 +18,7 @@ $(document).ready(function() {
 	data.forEach(function(element) {
 	    
 	    console.dir(element);
-	    var marker = L.marker(element.coords, {title: element.name});
+	    var marker = L.marker(element.coords.coordinates, {title: element.name});
 	    
 	    var popup_content = '<p><strong>'+element.name+'</strong></p>'
 		+ '<p>'+element.description+'</p>';
