@@ -5,8 +5,6 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     Scene.getNearest([42.3238266, -70.9869596], {index: 'coords', maxDist: 5100100}, function(err, scenes) {
-	    console.log("Nearest: "+err);
-	    
 	    if(err) {
 		return next(err);
 	    }
@@ -15,24 +13,6 @@ router.get('/', function(req, res, next) {
 	    
 	});
 
-        // res.format({
-        //     html: function(){
-	// 	console.log("HTML");
-	// 	res.render('scenes', { title: 'scenes', view: 'scenes' });
-		
-        //     },
-	//     json: function(){
-	// 	console.log("JSON");
-	// 	Scene.find({}).exec(function(err, scenes) {
-	// 	    if(err) {
-	// 		return next(err);
-	// 	    }
-	// 	    res.json(scenes);
-	// 	    res.end();
-		    
-	// 	});
-	//     }
-	// });
 });
 
 router.put('/location', function(req, res, next) {
@@ -40,8 +20,7 @@ router.put('/location', function(req, res, next) {
     if(req.body.location) {
 	Scene.getNearest(req.body.location, {index: 'coords', maxDist: req.body.maxDistance})
 	    .exec(function(err, scenes) {
-	    console.log("Nearest: "+err);
-	    
+    
 	    if(err) {
 		return next(err);
 	    }
@@ -84,7 +63,7 @@ router.get('/:id', function(req, res) {
             return next();
         }
 	console.log(JSON.stringify(scene));
-	res.json(scene);
+	res.render('scene', { title: 'scene', scene: scene });
     });
 });
 

@@ -211,7 +211,11 @@ module.exports = (function () {
                 query = query.filter(options.where);
 	    if(options.sort)
 		for(var k in options.sort)
-		    query = query.orderBy({index: k});
+		    if(options.sort[k] == -1) {
+			query = query.orderBy({index: r.desc(k)});
+		    } else {
+			query = query.orderBy({index: k});
+		    }
 	    
             query.run(conn, function(err, cursor) {
                 if(err)

@@ -11,7 +11,7 @@ block scripts
   
   script(type='text/javascript').
     var photo = !{JSON.stringify(photo)}
-    var scene = !{JSON.stringify(scene)}
+    var album = !{JSON.stringify(album)}
   script(type='text/javascript', src='/javascripts/photo.js')
 
 block content
@@ -54,9 +54,9 @@ block content
       .col-sm-3
         .list-group
           .list-group-item
-            strong= scene.name
+            strong= album.title
           .list-group-item
-            = scene.address
+            = photo.address
           .list-group-item
             = photo.date
           .list-group-item

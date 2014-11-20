@@ -53,9 +53,18 @@ img.img-photo {
     font-size: 18px;    
 }
 .img-tile {
-    margin-bottom: 30px;
+    margin-bottom: 8px;
 }
 
+.row.no-gutters {
+    margin-right: -3px;
+    margin-left: -3px;
+}
+.row.no-gutters [class^="col-"],
+.row.no-gutters [class*=" col-"] {
+    padding-right: 4px;
+    padding-left: 4px;
+}
 /* Album
    ------------------------------------------------ */
 .album-title {

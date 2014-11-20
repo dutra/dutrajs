@@ -16,9 +16,8 @@ block scripts
 block content
 
   .container
-    .row
+    .row.no-gutters
      - for (var x = 0; x < photos.length; x++)
-      .col-sm-2
-        //= JSON.stringify(photos[x])
+      .col-sm-3
         a(href="/photos/"+photos[x].id)
           img.img-responsive.img-tile(src='http://static.dutra.io/photos/'+photos[x].album_id+'/'+photos[x].id+'_square.jpg')

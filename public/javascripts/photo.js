@@ -2,7 +2,6 @@
 var tile = 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg';
 
 $(document).ready(function() {
-    console.log(scene.coords);
     var map = L.map('map-photo', {
         center: photo.coords,
         zoom: 14,
@@ -13,11 +12,11 @@ $(document).ready(function() {
     }).addTo(map);
 
     var markers = L.markerClusterGroup();
-    scene.photos.forEach(function(p) {
+    album.photos.forEach(function(p) {
 	if(p.id == photo.id)
-            var marker = L.marker(p.coords, {title: scene.name});
+            var marker = L.marker(p.coords, {title: photo.name});
 	else
-	    var marker = L.marker(p.coords, {title: scene.name, opacity: 0.6});
+	    var marker = L.marker(p.coords, {title: p.name, opacity: 0.6});
 	
         var popup_content = '<div class="text-center popup"> <a href="/photos/' + p.id + '"</a>' 
 	    + '<img class="img-responsive img-rounded img-popup" src="http://static.dutra.io/photos/'+p.album_id+'/'+p.id+'_thumb.jpg" >'
