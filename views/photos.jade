@@ -4,6 +4,7 @@ extends layout
 block stylesheets
   link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/leaflet.css')
   link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/MarkerCluster.css')
+  link(rel='stylesheet', type='text/css', media='all' href='/stylesheets/vendor/swipebox.min.css')
  
 block scripts
   script(type='text/javascript', src='/javascripts/vendor/leaflet.js')
@@ -11,6 +12,7 @@ block scripts
   
   script(type='text/javascript').
     var photos = !{JSON.stringify(photos)}
+  script(type='text/javascript', src='/javascripts/vendor/jquery.swipebox.min.js')
   script(type='text/javascript', src='/javascripts/photos.js')
 
 block content
@@ -19,5 +21,10 @@ block content
     .row.no-gutters
      - for (var x = 0; x < photos.length; x++)
       .col-sm-3
-        a(href="/photos/"+photos[x].id)
-          img.img-responsive.img-tile(src='http://static.dutra.io/photos/'+photos[x].album_id+'/'+photos[x].id+'_square.jpg')
+        .img-main-photo
+          .photo-bar
+            a(download='"'+photos[x].title+'.jpg"', href='http://static.dutra.io/photos/'+photos[x].album_id+'/'+photos[x].id+'.jpg')
+              i.fa.fa-download.fa-2x
+
+          a.swipebox(href='http://static.dutra.io/photos/'+photos[x].album_id+'/'+photos[x].id+'_large.jpg')
+            img.img-responsive.img-tile(src='http://static.dutra.io/photos/'+photos[x].album_id+'/'+photos[x].id+'_square.jpg')

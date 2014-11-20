@@ -15,3 +15,20 @@
 //     });
 // });
 
+
+$(document).ready(function() {
+    
+    $('.swipebox').swipebox();
+
+    $('.img-main-photo i').fadeTo(0, 0);
+    
+    $('.img-main-photo').hover(function(e) {
+	$('.img-main-photo i').stop(false, true);
+	$(e.currentTarget).find('i').fadeTo(300, 1);
+    }, function(e) {
+	$('.img-main-photo i').stop(false, true);
+	$(e.currentTarget).find('i').fadeTo(300, 0);
+    });
+
+    
+});
