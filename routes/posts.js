@@ -3,6 +3,7 @@ var router = express.Router();
 var marked = require('marked');
 var fs = require('fs');
 var highlightjs = require('highlight.js');
+var fm = require('json-front-matter');
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -48,11 +49,12 @@ router.get('/:path', function(req, res) {
         console.log(data);
 
 
+        var fmout = fm.parse(data);
+        var md = marked(fmout.body);
 
-        var md = marked(data);
         console.log(md);
 
-        res.render('posts_show', { title: 'post', view: 'x', subview: 'x',
+        res.render('posts_show', { title: fmout.attributes.title, //view: 'x', subview: 'x',
             md: md});
         });
 });
