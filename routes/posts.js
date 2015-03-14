@@ -11,12 +11,10 @@ marked.setOptions({
     tables: true,
     breaks: true,
     pedantic: false,
-    sanitize: true,
+    sanitize: false,
     smartLists: true,
     smartypants: false,
     highlight: function (code) {
-        console.log(code);
-        console.log(highlightjs.highlightAuto(code).value);
         return highlightjs.highlightAuto(code).value;
     }
 });
@@ -46,16 +44,12 @@ router.get('/:path', function(req, res) {
         if (err) {
             return res(err);
         }
-        console.log(data);
-
 
         var fmout = fm.parse(data);
         var md = marked(fmout.body);
 
-        console.log(md);
-
-        res.render('posts_show', { title: fmout.attributes.title, //view: 'x', subview: 'x',
-            md: md});
+        res.render('post', { title: fmout.attributes.title, //view: 'x', subview: 'x',
+            md: md, sections: fmout.attributes.sections});
         });
 });
 
