@@ -13,7 +13,9 @@
 	       padding-left: 15px;
     }
 
-
+    .cd-top.cd-is-visible {
+        visibility: hidden;
+    }
 
     #map {
         height: 500px;

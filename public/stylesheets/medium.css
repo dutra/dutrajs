@@ -11,4 +11,28 @@
 	height: 200px;
     }
 
+    /* back to top arrow
+    ------------------------------------------------- */
+    .cd-top {
+        height: 40px;
+        width: 40px;
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 10;
+        /* image replacement properties */
+        overflow: hidden;
+        text-indent: 100%;
+        white-space: nowrap;
+        background-size: 30px 30px;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .cd-top.cd-is-visible {
+        /* the button becomes visible */
+        visibility: visible;
+        opacity: 1;
+    }
+
 }
