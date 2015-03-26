@@ -22,6 +22,16 @@ a:hover {
     width: 100%;
 }
 
+p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 /* Photo
 -------------------------------------------------- */
 .title {
@@ -199,10 +209,10 @@ ul.subnav {
     margin-top:20px;
     margin-bottom:20px
 }
-.bs-docs-sidebar .nav>li>a {
+.bs-docs-sidebar .nav>li, .bs-docs-sidebar .nav>li>a {
     display:block;
     padding:4px;/* 20px;*/
-    font-size:13px;
+    /*font-size:14px;*/
     font-weight:500;
     /*color:#767676*/
 }
@@ -228,7 +238,7 @@ ul.subnav {
     padding-top:1px;
     padding-bottom:1px;
     padding-left:30px;
-    font-size:12px;
+    /*font-size:14px;*/
     font-weight:400
 }
 .bs-docs-sidebar .nav .nav>li>a:focus, .bs-docs-sidebar .nav .nav>li>a:hover {

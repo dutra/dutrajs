@@ -19,6 +19,10 @@ marked.setOptions({
     }
 });
 
+router.get('/', function(req, res) {
+        res.render('posts', { title: "Notes"});
+});
+
 router.param(function(name, fn){
     if (fn instanceof RegExp) {
         return function(req, res, next, val){
@@ -35,7 +39,7 @@ router.param(function(name, fn){
 });
 
 
-router.param('path', /^[^/.][a-zA-Z]+[/]?[a-zA-Z]+$/i);
+router.param('path', /^[^/.][a-zA-Z_]+$/i);
 
 /* GET home page. */
 router.get('/:path', function(req, res) {
