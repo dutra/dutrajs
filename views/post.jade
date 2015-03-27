@@ -13,19 +13,20 @@ block scripts
 block content
     a.cd-top(href="#0") Top
     .container
-        .row
-            .col-sm-6
-                nav.bs-docs-sidebar
-                    ul.nav.bs-docs-sidenav
-                        - for(var i = 0; i < sections.length; i++)
-                            - var section = sections[i];
-                            li
-                                a(href=section.anchor)= section.title
-                                ul.nav
-                                    - for(var j=0; j<section.subsections.length; j++)
-                                        - var subsection = section.subsections[j];
-                                        li
-                                            a(href=subsection.anchor)= subsection.title
+        - if (sections.length > 0)
+            .row
+                .col-sm-6
+                    nav.bs-docs-sidebar
+                        ul.nav.bs-docs-sidenav
+                            - for(var i = 0; i < sections.length; i++)
+                                - var section = sections[i];
+                                li
+                                    a(href=section.anchor)= section.title
+                                    ul.nav
+                                        - for(var j=0; j<section.subsections.length; j++)
+                                            - var subsection = section.subsections[j];
+                                            li
+                                                a(href=subsection.anchor)= subsection.title
                                         
                                     
         .row
