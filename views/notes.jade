@@ -1,0 +1,35 @@
+
+extends layout
+
+block stylesheets
+    link(rel='stylesheet', type='text/css', media='all' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css')
+
+block scripts
+
+block content
+    .container
+        .row
+            .col-sm-10
+                | This space is reserved for personal notes documenting topics I am learning. They are mostly meant 
+                | for me to write down information I would rather have in an easy way I could access in the future.
+                | Feel free to use anything. They are all written in markdown and source can be downloaded from my github repository.
+        .row
+            .col-sm-6
+                nav.bs-docs-sidebar
+                    ul.nav.bs-docs-sidenav
+                        li AVR
+                            p Notes about Atmega AVR microcontroller proramming
+                            ul.nav
+                                li
+                                    a(href="/notes/avr/fixed_point") Fixed Point Arithmetic with AVR-GCC
+                        li Abacate
+                            p Operating System Development for ARM on the BeagleBone Black
+                            ul.nav
+                                li
+                        li KnitPrint
+                            ul.nav
+                                li    
+                        li Ice Cream Making
+                            ul.nav
+                                li
+                                    a(href="/notes/icecream/custard_base") Custard Base

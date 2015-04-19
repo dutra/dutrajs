@@ -19,8 +19,8 @@ marked.setOptions({
     }
 });
 
-router.get('/', function(req, res) {
-        res.render('posts', { title: "Notes"});
+router.get('/', function(req, res, next) {
+        res.render('notes', { title: "Notes"});
 });
 
 router.param(function(name, fn){
@@ -39,20 +39,40 @@ router.param(function(name, fn){
 });
 
 
-router.param('path', /^[^/.][a-zA-Z_]+$/i);
+router.param('folder', /^[a-zA-Z_]+$/i);
+router.param('file', /^[a-zA-Z_]+$/i);
 
 /* GET home page. */
-router.get('/:path', function(req, res) {
-    var file = '_posts/'+req.params.path+'.md';
+router.get('/:folder/:file', function(req, res, next) {
+    console.log(req.params.file);
+    var file = '_notes/'+req.params.folder+'/'+req.params.file+'.md';
     fs.readFile(file, 'utf8', function (err,data) {
         if (err) {
-            return res(err);
+            console.log(next);
+            return next(err);
         }
 
         var fmout = fm.parse(data);
         var md = marked(fmout.body);
 
-        res.render('post', { title: fmout.attributes.title, //view: 'x', subview: 'x',
+        res.render('note', { title: fmout.attributes.title, //view: 'x', subview: 'x',
+            md: md, sections: fmout.attributes.sections});
+        });
+});
+/* GET home page. */
+router.get('/:file', function(req, res, next) {
+    console.log(req.params.file);
+    var file = '_notes/'+req.params.file+'.md';
+    fs.readFile(file, 'utf8', function (err,data) {
+        if (err) {
+            console.log(next);
+            return next(err);
+        }
+
+        var fmout = fm.parse(data);
+        var md = marked(fmout.body);
+
+        res.render('note', { title: fmout.attributes.title, //view: 'x', subview: 'x',
             md: md, sections: fmout.attributes.sections});
         });
 });
